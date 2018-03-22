@@ -1,0 +1,3 @@
+php_reserved : __hALT_cOMPilER()
+php_reserved : ABSTRACT
+php_reserved : IF

@@ -1,0 +1,95 @@
+%{
+#include "miniPHP.h"
+%}
+%option nounput yylineno
+
+%%
+:					return COLON;
+"db_type"			return TYPE;
+"db_name"			return NAME;
+"db_table_prefix"	return TABLE_PREFIX;
+"db_port"			return PORT;
+"php_reserved"		return RESERVED;
+
+[_][_][h|H][a|A][l|L][t|T][_][c|C][o|O][m|M][p|P][i|I][l|L][e|E][r|R][(][)] |
+[a|A][b|B][s|S][t|T][r|R][a|A][c|C][t|T] |
+[a|A][n|N][d|D] |
+[a|A][r|R][r|R][a|A][y|Y][(][)] |
+[a|A][s|S] |
+[b|B][r|R][e|E][a|A][k|K] |
+[c|C][a|A][l|L][l|L][a|A][b|B][l|L][e|E] |
+[c|C][a|A][s|S][e|E] |
+[c|C][a|A][t|T][c|C][h|H] |
+[c|C][l|L][a|A][s|S][s|S] |
+[c|C][l|L][o|O][n|N][e|E] |
+[c|C][o|O][n|N][s|S][t|T] |
+[c|C][o|O][n|N][t|T][i|I][n|N][u|U][e|E] |
+[d|D][e|E][c|C][l|L][a|A][r|R][e|E] |
+[d|D][e|E][f|F][a|A][u|U][l|L][t|T] |
+[d|D][i|I][e|E][(][)] |
+[d|D][o|O] |
+[e|E][c|C][h|H][o|O] |
+[e|E][l|L][s|S][e|E] |
+[e|E][l|L][s|S][e|E][i|I][f|F] |
+[e|E][m|M][p|P][t|T][y|Y][(][)] |
+[e|E][n|N][d|D][d|D][e|E][c|C][l|L][a|A][r|R][e|E] |
+[e|E][n|N][d|D][f|F][o|O][r|R] |
+[e|E][n|N][d|D][f|F][o|O][r|R][e|E][a|A][c|C][h|H] |
+[e|E][n|N][d|D][i|I][f|F] |
+[e|E][n|N][d|D][s|S][w|W][i|I][t|T][c|C][h|H] |
+[e|E][n|N][d|D][w|W][h|H][i|I][l|L][e|E] |
+[e|E][v|V][a|A][l|L][(][)] |
+[e|E][x|X][i|I][t|T][(][)] |
+[e|E][x|X][t|T][e|E][n|N][d|D][s|S] |
+[f|F][i|I][n|N][a|A][l|L] |
+[f|F][i|I][n|N][a|A][l|L][l|L][y|Y] |
+[f|F][o|O][r|R] |
+[f|F][o|O][r|R][e|E][a|A][c|C][h|H] |
+[f|F][u|U][n|N][c|C][t|T][i|I][o|O][n|N] |
+[g|G][l|L][o|O][b|B][a|A][l|L] |
+[g|G][o|O][t|T][o|O] |
+[i|I][f|F] |
+[i|I][m|M][p|P][l|L][e|E][m|M][e|E][n|N][t|T][s|S] |
+[i|I][n|N][c|C][l|L][u|U][d|D][e|E] |
+[i|I][n|N][c|C][l|L][u|U][d|D][e|E][_][o|O][n|N][c|C][e|E] |
+[i|I][n|N][s|S][t|T][a|A][n|N][c|C][e|E][o|O][f|F] |
+[i|I][n|N][s|S][t|T][e|E][a|A][d|D][o|O][f|F] |
+[i|I][n|N][t|T][e|E][r|R][f|F][a|A][c|C][e|E] |
+[i|I][s|S][s|S][e|E][t|T][(][)] |
+[l|L][i|I][s|S][t|T][(][)] |
+[n|N][a|A][m|M][e|E][s|S][p|P][a|A][c|C][e|E] |
+[n|N][e|E][w|W] |
+[o|O][r|R] |
+[p|P][r|R][i|I][n|N][t|T] |
+[p|P][r|R][i|I][v|V][a|A][t|T][e|E] |
+[p|P][r|R][o|O][t|T][e|E][c|C][t|T][e|E][d|D] |
+[p|P][u|U][b|B][l|L][i|I][c|C] |
+[r|R][e|E][q|Q][u|U][i|I][r|R][e|E] |
+[r|R][e|E][q|Q][u|U][i|I][r|R][e|E][_][o|O][n|N][c|C][e|E] |
+[r|R][e|E][t|T][u|U][r|R][n|N] |
+[s|S][t|T][a|A][t|T][i|I][c|C] |
+[s|S][w|W][i|I][t|T][c|C][h|H] |
+[t|T][h|H][r|R][o|O][w|W] |
+[t|T][r|R][a|A][i|I][t|T] |
+[t|T][r|R][y|Y] |
+[u|U][n|N][s|S][e|E][t|T][(][)] |
+[u|U][s|S][e|E] |
+[v|V][a|A][r|R] |
+[w|W][h|H][i|I][l|L][e|E] |
+[x|X][o|O][r|R] |
+[y|Y][i|I][e|E][l|L][d|D]	return WORD_RESERVED;
+
+
+
+[a-zA-Z][_a-zA-Z0-9]*	return IDENTIFIER;
+[1-9][0-9]*				return INTEGER;
+[ \t\n]					;
+.					printf("unexpected character\n");
+
+%%
+
+int yywrap(void)
+{
+	return 1;
+}
+
