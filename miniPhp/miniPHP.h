@@ -7,3 +7,5 @@
 #define INTEGER 7
 #define RESERVED 8
 #define WORD_RESERVED 9
+#define OARITH 10
+#define ARITHMETIC_OPERATOR 11

@@ -10,8 +10,9 @@
 "db_table_prefix"	return TABLE_PREFIX;
 "db_port"			return PORT;
 "php_reserved"		return RESERVED;
+"php_oarithmetic"	return OARITH;
 
-[_][_][h|H][a|A][l|L][t|T][_][c|C][o|O][m|M][p|P][i|I][l|L][e|E][r|R][(][)] |
+[_][_][H][A][L][T][_][C][O][M][P][I][L][E][R][(][)] |
 [a|A][b|B][s|S][t|T][r|R][a|A][c|C][t|T] |
 [a|A][n|N][d|D] |
 [a|A][r|R][r|R][a|A][y|Y][(][)] |
@@ -80,6 +81,12 @@
 [y|Y][i|I][e|E][l|L][d|D]	return WORD_RESERVED;
 
 
+[+] | 
+[-] | 
+[*] |
+[/] | 
+[%] | 
+ [*][*] return ARITHMETIC_OPERATOR;
 
 [a-zA-Z][_a-zA-Z0-9]*	return IDENTIFIER;
 [1-9][0-9]*				return INTEGER;

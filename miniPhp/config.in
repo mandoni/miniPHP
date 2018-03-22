@@ -1,3 +1,9 @@
-php_reserved : __hALT_cOMPilER()
+php_reserved : __HALT_COMPILER()
 php_reserved : ABSTRACT
-php_reserved : IF
+php_oarithmetic : +
+php_oarithmetic : *
+php_oarithmetic : -
+php_oarithmetic : /
+php_oarithmetic : %
+php_oarithmetic : **
+     
