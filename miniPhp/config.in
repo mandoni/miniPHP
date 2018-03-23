@@ -3,5 +3,9 @@ php_reserved : ABSTRACT
 php_oarithmetic : *
 php_logico : AND
 php_types : $a = -3/43;
-php_types : echo 'sds3234_32';
-php_variables : $mes_2015
+php_types : $hola = 'sds3234_32';
+php_identify : $mes_2015;
+php_variable : $_POST = 'hola';
+php_constant : define("constante", "hola");
+php_constant : Const nombre = 'constante';
+php_structure : if ($a != $                  

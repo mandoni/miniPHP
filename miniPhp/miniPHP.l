@@ -9,7 +9,10 @@
 "php_oarithmetic"	return OARITH;
 "php_logico"		return LOGICOP;
 "php_types"			return TYPES;
-"php_variables"		return VARIABLES; 
+"php_identify"		return IDENTIFY; 
+"php_variable"		return VARIABLE;
+"php_constant"		return CONSTANT;
+"php_structure"		return STRUCTURE;
 
 [_][_][H][A][L][T][_][C][O][M][P][I][L][E][R][(][)] |
 [a|A][b|B][s|S][t|T][r|R][a|A][c|C][t|T] |
@@ -89,17 +92,23 @@
 [!] |
 [&][&] 				return LOGIC_OPERATOR;
 
-[$][a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[[T|t][R|r][U|u][E|e]|[F|f][A|a][L|l][S|s][E|e]][;] |
-[$][a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[0-9]+[;] |
-[$][a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[-][0-9]+[;] |
-[$][a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[0][b][0-1]+[;] |
-[$][a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[0-9]+[/][0-9]+[;] |
-[$][a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[-][0-9]+[/][0-9]+[;] |
-[$][a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*["][_a-zA-Z0-9]*["][;] |
-[$][a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*['][_a-zA-Z0-9]*['][;] |
+[$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[[T|t][R|r][U|u][E|e]|[F|f][A|a][L|l][S|s][E|e]][;] |
+[$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[0-9]+[;] |
+[$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[-][0-9]+[;] |
+[$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[0][b][0-1]+[;] |
+[$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[0-9]+[/][0-9]+[;] |
+[$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[-][0-9]+[/][0-9]+[;] |
+[$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*["][_a-zA-Z0-9]*["][;] |
+[$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*['][_a-zA-Z0-9]*['][;] |
 [E|e][C|c][H|h][O|o][" "]*['][_a-zA-Z0-9]*['][;]	return TYPES_EXPRES;
 
-[$][a-zA-Z][_a-zA-Z0-9]* 		return VARIABLES_EXPRESS;
+[$][a-zA-Z][_a-zA-Z0-9]*[;] 		return IDENTIFY_EXPRESS;
+
+[C|c][O|o][N|n][S|s][T|t][" "]*[a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*['][_a-zA-Z0-9]*['][;]		|
+[C|c][O|o][N|n][S|s][T|t][" "]*[a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[-|+][0-9]+[;] 	|
+[d][e][f][i][n][e][(]["][a-zA-Z][_a-zA-Z0-9]*["][" "]*[,][" "]*["][_a-zA-Z0-9]*["][" "]*[)][;] return CONSTANT_EXPRESS;
+
+[I|i][F|f][" "]*[(][$][a-zA-Z][_a-zA-Z0-9]*[" "]*[[>]|[<]|[&][&]|[=][=]|[!][=]][" "]*[$] return STRUCTURE_EXPRESS;
 
 [ \t\n]					;
 .					printf("unexpected character\n");

@@ -5,7 +5,8 @@ extern int yylex();
 extern int yylineno;
 extern char* yytext;
 
-char *names[] = {NULL, "php_reserved", "php_oarithmetic", "php_logico", "php_types", "php_variables"};
+char *names[] = {NULL, "php_reserved", "php_oarithmetic", "php_logico", "php_types", "php_identify",
+"php_structure"};
 
 int main(void) 
 {
@@ -51,12 +52,33 @@ int main(void)
 			}
 			printf("%s is a type definition\n", yytext);
 			break;
-		case VARIABLES: 
-			if(vtoken != VARIABLES_EXPRESS){
+		case IDENTIFY: 
+			if(vtoken != IDENTIFY_EXPRESS){
+				printf("Syntax error in line %d, Expected an identify definition but found %s\n", yylineno, yytext);
+				return 1;
+			}
+			printf("%s is an identify\n", yytext);
+			break;
+		case VARIABLE: 
+			if(vtoken != TYPES_EXPRES){
 				printf("Syntax error in line %d, Expected a variable definition but found %s\n", yylineno, yytext);
 				return 1;
 			}
-			printf("%s is a variable definition\n", yytext);
+			printf("%s is a correct variable\n", yytext);
+			break;
+		case CONSTANT: 
+			if(vtoken != CONSTANT_EXPRESS){
+				printf("Syntax error in line %d, Expected a constant definition but found %s\n", yylineno, yytext);
+				return 1;
+			}
+			printf("%s is a correct constant\n", yytext);
+			break;
+		case STRUCTURE: 
+			if(vtoken != STRUCTURE_EXPRESS){
+				printf("Syntax error in line %d, Expected a structure definition but found %s\n", yylineno, yytext);
+				return 1;
+			}
+			printf("%s is a correct structure definition\n", yytext);
 			break;
 		default:
 			printf("Syntax error in line %d\n",yylineno);
