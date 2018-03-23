@@ -5,16 +5,14 @@
 
 %%
 :					return COLON;
-"db_type"			return TYPE;
-"db_name"			return NAME;
-"db_table_prefix"	return TABLE_PREFIX;
-"db_port"			return PORT;
 "php_reserved"		return RESERVED;
 "php_oarithmetic"	return OARITH;
+"php_logico"		return LOGICOP;
+"php_types"			return TYPES;
+"php_variables"		return VARIABLES; 
 
 [_][_][H][A][L][T][_][C][O][M][P][I][L][E][R][(][)] |
 [a|A][b|B][s|S][t|T][r|R][a|A][c|C][t|T] |
-[a|A][n|N][d|D] |
 [a|A][r|R][r|R][a|A][y|Y][(][)] |
 [a|A][s|S] |
 [b|B][r|R][e|E][a|A][k|K] |
@@ -60,7 +58,6 @@
 [l|L][i|I][s|S][t|T][(][)] |
 [n|N][a|A][m|M][e|E][s|S][p|P][a|A][c|C][e|E] |
 [n|N][e|E][w|W] |
-[o|O][r|R] |
 [p|P][r|R][i|I][n|N][t|T] |
 [p|P][r|R][i|I][v|V][a|A][t|T][e|E] |
 [p|P][r|R][o|O][t|T][e|E][c|C][t|T][e|E][d|D] |
@@ -77,19 +74,33 @@
 [u|U][s|S][e|E] |
 [v|V][a|A][r|R] |
 [w|W][h|H][i|I][l|L][e|E] |
-[x|X][o|O][r|R] |
 [y|Y][i|I][e|E][l|L][d|D]	return WORD_RESERVED;
-
 
 [+] | 
 [-] | 
 [*] |
 [/] | 
 [%] | 
- [*][*] return ARITHMETIC_OPERATOR;
+[*][*] 					return ARITHMETIC_OPERATOR;
 
-[a-zA-Z][_a-zA-Z0-9]*	return IDENTIFIER;
-[1-9][0-9]*				return INTEGER;
+[a|A][n|N][d|D] |
+[o|O][r|R] |
+[x|X][o|O][r|R] |
+[!] |
+[&][&] 				return LOGIC_OPERATOR;
+
+[$][a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[[T|t][R|r][U|u][E|e]|[F|f][A|a][L|l][S|s][E|e]][;] |
+[$][a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[0-9]+[;] |
+[$][a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[-][0-9]+[;] |
+[$][a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[0][b][0-1]+[;] |
+[$][a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[0-9]+[/][0-9]+[;] |
+[$][a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[-][0-9]+[/][0-9]+[;] |
+[$][a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*["][_a-zA-Z0-9]*["][;] |
+[$][a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*['][_a-zA-Z0-9]*['][;] |
+[E|e][C|c][H|h][O|o][" "]*['][_a-zA-Z0-9]*['][;]	return TYPES_EXPRES;
+
+[$][a-zA-Z][_a-zA-Z0-9]* 		return VARIABLES_EXPRESS;
+
 [ \t\n]					;
 .					printf("unexpected character\n");
 

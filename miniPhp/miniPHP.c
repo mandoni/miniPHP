@@ -5,8 +5,7 @@ extern int yylex();
 extern int yylineno;
 extern char* yytext;
 
-char *names[] = {NULL, "db_type", "db_name", "db_table_prefix", "db_port", "php_reserved", 
-		"php_oarithmetic"};
+char *names[] = {NULL, "php_reserved", "php_oarithmetic", "php_logico", "php_types", "php_variables"};
 
 int main(void) 
 {
@@ -38,21 +37,26 @@ int main(void)
 			}
 			printf("%s is an arithmetic operator\n", yytext);
 			break;
-		case TYPE:
-		case NAME:
-		case TABLE_PREFIX:
-			if(vtoken != IDENTIFIER) {
-				printf("Syntax error in line %d, Expected an identifier but found %s\n", yylineno, yytext);
+		case LOGICOP: 
+			if(vtoken != LOGIC_OPERATOR){
+				printf("Syntax error in line %d, Expected a logic operator but found %s\n", yylineno, yytext);
 				return 1;
 			}
-			printf("%s is set to %s\n", names[ntoken], yytext);
+			printf("%s is a logic operator\n", yytext);
 			break;
-		case PORT:
-			if(vtoken != INTEGER) {
-				printf("Syntax error in line %d, Expected an integer but found %s\n", yylineno, yytext);
+		case TYPES: 
+			if(vtoken != TYPES_EXPRES){
+				printf("Syntax error in line %d, Expected a type definition but found %s\n", yylineno, yytext);
 				return 1;
 			}
-			printf("%s is set to %s\n", names[ntoken], yytext);
+			printf("%s is a type definition\n", yytext);
+			break;
+		case VARIABLES: 
+			if(vtoken != VARIABLES_EXPRESS){
+				printf("Syntax error in line %d, Expected a variable definition but found %s\n", yylineno, yytext);
+				return 1;
+			}
+			printf("%s is a variable definition\n", yytext);
 			break;
 		default:
 			printf("Syntax error in line %d\n",yylineno);

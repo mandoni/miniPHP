@@ -1,9 +1,7 @@
 php_reserved : __HALT_COMPILER()
 php_reserved : ABSTRACT
-php_oarithmetic : +
 php_oarithmetic : *
-php_oarithmetic : -
-php_oarithmetic : /
-php_oarithmetic : %
-php_oarithmetic : **
-     
+php_logico : AND
+php_types : $a = -3/43;
+php_types : echo 'sds3234_32';
+php_variables : $mes_2015
