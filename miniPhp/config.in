@@ -8,4 +8,7 @@ php_identify : $mes_2015;
 php_variable : $_POST = 'hola';
 php_constant : define("constante", "hola");
 php_constant : Const nombre = 'constante';
-php_structure : if ($a != $                  
+php_structure : while ($gf3 != 36)
+{
+    codigo
+}

@@ -8,5 +8,3 @@ lex.yy.c: myscanner.l
 clean:
 	rm myscanner
 	rm lex.yy.c
-
-[$][a-zA-Z][_a-zA-Z0-9]*[" "]*[)][" "]*[{]
