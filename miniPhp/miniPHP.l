@@ -13,6 +13,10 @@
 "php_variable"		return VARIABLE;
 "php_constant"		return CONSTANT;
 "php_structure"		return STRUCTURE;
+"php_pre_variable"	return PREVARIABLE;
+"php_comment"		return COMMENT;
+"php_db"			return DB;
+"php_function"		return FUNCTION;
 
 [_][_][H][A][L][T][_][C][O][M][P][I][L][E][R][(][)] |
 [a|A][b|B][s|S][t|T][r|R][a|A][c|C][t|T] |
@@ -211,7 +215,28 @@
 [r|R][e|E][t|T][u|U][r|R][n|N][" "]*[(][" "]*["][_a-zA-Z0-9]*["][" "]*[)][;]	|
 [r|R][e|E][t|T][u|U][r|R][n|N][" "]*[(][" "]*['][_a-zA-Z0-9]*['][" "]*[)][;]	return STRUCTURE_EXPRESS;
 
+[$][G][L][O][B][A][L][S]	|
+[$][_][S][E][R][V][E][R]	|
+[$][_][G][E][T]	|
+[$][_][P][O][S][T]	|
+[$][_][F][I][L][E][S]	|
+[$][_][C][O][O][K][I][E]	|
+[$][_][S][E][S][S][I][O][N]	|
+[$][_][R][E][Q][U][E][S][T]	|
+[$][_][E][N][V]	|
+[$][p][h][p][_][e][r][r][o][r][m][s][g]	|
+[$][H][T][T][P][_][R][A][W][_][P][O][S][T][_][D][A][T][A]	|
+[$][h][t][t][p][_][r][e][s][p][o][n][s][e][_][h][e][a][d][e][r]	|
+[$][a][r][g][c]	|
+[$][a][r][g][v]		return PREDETERMINATE_VARIABLE;
 
+[/][/][" "-_,-=a-zA-Z0-9]*	|
+[#][" "-_,-=a-zA-Z0-9]*	|
+[/][*]["\n"-" ".-_,-=a-zA-Z0-9]*[*][/]	return COMMENT_EXPRESS;
+
+[$][R|r][E|e][C|c][O|o][R|r][D|d][S|s][E|e][T|t][[]['][_A-Z0-9]*['][]]	return DB_ACCESS;
+
+[f|F][u|U][n|N][c|C][t|T][i|I][o|O][n|N][(]["\n"-" ".-_$-,a-zA-Z0-9]*[)][" "]*[\n]*[" "]*[{][" "]*[\n]*[" "]*["\n"-" ".-_$-,a-zA-Z0-9]*[" "]*[\n]*[" "]*[R|r]*[E|e]*[T|t]*[U|u]*[R|r]*[N|n]*[" "]*["\n"-" ".-_$-,a-zA-Z0-9]*[;]*[" "]*[\n]*[" "]*[}]	return FUNCTION_DEFINITION;
 
 [ \t\n]					;
 .					printf("unexpected character\n");

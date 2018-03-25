@@ -12,3 +12,7 @@ php_pre_variable : $GLOBALS
 php_comment : //Comentario uno
 php_comment : #console comentario
 php_db : $recordset['AES_ES']
+php_function : function($S){
+    codigo
+    return $e;
+}

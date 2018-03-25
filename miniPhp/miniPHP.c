@@ -80,6 +80,34 @@ int main(void)
 			}
 			printf("%s is a correct structure definition\n", yytext);
 			break;
+			case PREVARIABLE: 
+			if(vtoken != PREDETERMINATE_VARIABLE){
+				printf("Syntax error in line %d, Expected a predeterminate variable but found %s\n", yylineno, yytext);
+				return 1;
+			}
+			printf("%s is a correct variable\n", yytext);
+			break;
+			case COMMENT: 
+			if(vtoken != COMMENT_EXPRESS){
+				printf("Syntax error in line %d, Expected a predeterminate comment but found %s\n", yylineno, yytext);
+				return 1;
+			}
+			printf("%s is a correct comment expression\n", yytext);
+			break;
+			case DB: 
+			if(vtoken != DB_ACCESS){
+				printf("Syntax error in line %d, Expected a db access but found %s\n", yylineno, yytext);
+				return 1;
+			}
+			printf("%s is a correct db access expression\n", yytext);
+			break;
+			case FUNCTION: 
+			if(vtoken != FUNCTION_DEFINITION){
+				printf("Syntax error in line %d, Expected a function definition but found %s\n", yylineno, yytext);
+				return 1;
+			}
+			printf("%s is a correct function definition\n", yytext);
+			break;
 		default:
 			printf("Syntax error in line %d\n",yylineno);
 		}
