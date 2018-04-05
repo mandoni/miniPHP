@@ -5,6 +5,7 @@
 
 %%
 :					return COLON;
+"php_mark"			return MARK;
 "php_reserved"		return RESERVED;
 "php_oarithmetic"	return OARITH;
 "php_logico"		return LOGICOP;
@@ -213,7 +214,8 @@
 [r|R][e|E][t|T][u|U][r|R][n|N][" "]*[(][" "]*[0-9]*[" "]*[)][;]	|
 [r|R][e|E][t|T][u|U][r|R][n|N][" "]*[(][" "]*[$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[)][;]	|
 [r|R][e|E][t|T][u|U][r|R][n|N][" "]*[(][" "]*["][_a-zA-Z0-9]*["][" "]*[)][;]	|
-[r|R][e|E][t|T][u|U][r|R][n|N][" "]*[(][" "]*['][_a-zA-Z0-9]*['][" "]*[)][;]	return STRUCTURE_EXPRESS;
+[r|R][e|E][t|T][u|U][r|R][n|N][" "]*[(][" "]*['][_a-zA-Z0-9]*['][" "]*[)][;]	|	
+[s|S][w|W][i|I][t|T][c|C][h|H][" "]*[(]["\n"-" ".-_$-,a-zA-Z0-9]*[)][" "]*[\n]*[{]["\n"-" ".-_$-,:-;a-zA-Z0-9]*[}]	return STRUCTURE_EXPRESS;
 
 [$][G][L][O][B][A][L][S]	|
 [$][_][S][E][R][V][E][R]	|
@@ -234,9 +236,13 @@
 [#][" "-_,-=a-zA-Z0-9]*	|
 [/][*]["\n"-" ".-_,-=a-zA-Z0-9]*[*][/]	return COMMENT_EXPRESS;
 
+[<][?][p|P][h|H][p|P]	|
+[?][>]		return ENDMARK;
+
 [$][R|r][E|e][C|c][O|o][R|r][D|d][S|s][E|e][T|t][[]['][_A-Z0-9]*['][]]	return DB_ACCESS;
 
-[f|F][u|U][n|N][c|C][t|T][i|I][o|O][n|N][(]["\n"-" ".-_$-,a-zA-Z0-9]*[)][" "]*[\n]*[" "]*[{][" "]*[\n]*[" "]*["\n"-" ".-_$-,a-zA-Z0-9]*[" "]*[\n]*[" "]*[R|r]*[E|e]*[T|t]*[U|u]*[R|r]*[N|n]*[" "]*["\n"-" ".-_$-,a-zA-Z0-9]*[;]*[" "]*[\n]*[" "]*[}]	return FUNCTION_DEFINITION;
+[f|F][u|U][n|N][c|C][t|T][i|I][o|O][n|N][(]["\n"-" ".-_$-,a-zA-Z0-9]*[)][" "]*[\n]*[" "]*[{][" "]*[\n]*[" "]*["\n"-" ".-_$-,a-zA-Z0-9]*[" "]*[\n]*[" "]*[R|r]*[E|e]*[T|t]*[U|u]*[R|r]*[N|n]*[" "]*["\n"-" ".-_$-,a-zA-Z0-9]*[;]*[" "]*[\n]*[" "]*[}]	|
+[a-zA-Z][_a-zA-Z0-9]*[" "]*[(]["\n"-" ".-_$-,a-zA-Z0-9]*[)]	return FUNCTION_DEFINITION;
 
 [ \t\n]					;
 .					printf("unexpected character\n");

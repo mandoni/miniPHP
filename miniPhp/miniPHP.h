@@ -22,3 +22,5 @@
 #define DB_ACCESS 22
 #define FUNCTION 23
 #define FUNCTION_DEFINITION 24
+#define MARK 25
+#define ENDMARK 26
