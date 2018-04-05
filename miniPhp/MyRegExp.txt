@@ -1,24 +1,4 @@
-%{
-#include "miniPHP.h"
-%}
-%option nounput yylineno
-
-%%
-:					return COLON;
-"php_mark"			return MARK;
-"php_reserved"		return RESERVED;
-"php_oarithmetic"	return OARITH;
-"php_logico"		return LOGICOP;
-"php_types"			return TYPES;
-"php_identify"		return IDENTIFY; 
-"php_variable"		return VARIABLE;
-"php_constant"		return CONSTANT;
-"php_structure"		return STRUCTURE;
-"php_pre_variable"	return PREVARIABLE;
-"php_comment"		return COMMENT;
-"php_db"			return DB;
-"php_function"		return FUNCTION;
-
+Palabra reservada:
 [_][_][H][A][L][T][_][C][O][M][P][I][L][E][R][(][)] |
 [a|A][b|B][s|S][t|T][r|R][a|A][c|C][t|T] |
 [a|A][r|R][r|R][a|A][y|Y][(][)] |
@@ -73,21 +53,24 @@
 [u|U][n|N][s|S][e|E][t|T][(][)] |
 [u|U][s|S][e|E] |
 [v|V][a|A][r|R] |
-[y|Y][i|I][e|E][l|L][d|D]	return WORD_RESERVED;
+[y|Y][i|I][e|E][l|L][d|D]
 
+Operador aritmético 
 [+] | 
 [-] | 
 [*] |
 [/] | 
 [%] | 
-[*][*] 					return ARITHMETIC_OPERATOR;
+[*][*]
 
+Operador lógico 
 [a|A][n|N][d|D] |
 [o|O][r|R] |
 [x|X][o|O][r|R] |
 [!] |
-[&][&] 				return LOGIC_OPERATOR;
+[&][&]
 
+Tipos
 [$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[[T|t][R|r][U|u][E|e]|[F|f][A|a][L|l][S|s][E|e]][;] |
 [$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[0-9]+[;] |
 [$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[-][0-9]+[;] |
@@ -96,14 +79,17 @@
 [$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[-][0-9]+[/][0-9]+[;] |
 [$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*["][_a-zA-Z0-9]*["][;] |
 [$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*['][_a-zA-Z0-9]*['][;] |
-[E|e][C|c][H|h][O|o][" "]*['][_a-zA-Z0-9]*['][;]	return TYPES_EXPRES;
+[E|e][C|c][H|h][O|o][" "]*['][_a-zA-Z0-9]*['][;]
 
-[$][a-zA-Z][_a-zA-Z0-9]*[;] 		return IDENTIFY_EXPRESS;
+Identificadores
+[$][a-zA-Z][_a-zA-Z0-9]*[;]
 
+Constates 
 [C|c][O|o][N|n][S|s][T|t][" "]*[a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*['][_a-zA-Z0-9]*['][;] |
 [C|c][O|o][N|n][S|s][T|t][" "]*[a-zA-Z][_a-zA-Z0-9]*[" "]*[=][" "]*[-|+][0-9]+[;] 	|
-[d][e][f][i][n][e][(]["][a-zA-Z][_a-zA-Z0-9]*["][" "]*[,][" "]*["][_a-zA-Z0-9]*["][" "]*[)][;]	return CONSTANT_EXPRESS;
+[d][e][f][i][n][e][(]["][a-zA-Z][_a-zA-Z0-9]*["][" "]*[,][" "]*["][_a-zA-Z0-9]*["][" "]*[)][;]
 
+Estructuras de control 
 [i|I][f|F][" "]*[(][" "]*[$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[<|>][" "]*[$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[)][" "]*[\n]*[" "]*[{][" "]*[\n]*[" "]*[_a-zA-Z0-9]*[" "]*[\n]*[" "]*[}][" "]*[\n]*[" "]*[E|e][L|l][S|s][E|e][" "]*[\n]*[" "]*[{][" "]*[\n]*[" "]*[_a-zA-Z0-9]*[" "]*[\n]*[" "]*[}]	|
 [i|I][f|F][" "]*[(][" "]*[$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[=]=[][" "]*[$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[)][" "]*[\n]*[" "]*[{][" "]*[\n]*[" "]*[_a-zA-Z0-9]*[" "]*[\n]*[" "]*[}][" "]*[\n]*[" "]*[E|e][L|l][S|s][E|e][" "]*[\n]*[" "]*[{][" "]*[\n]*[" "]*[_a-zA-Z0-9]*[" "]*[\n]*[" "]*[}]	|
 [i|I][f|F][" "]*[(][" "]*[$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[<][=][" "]*[$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[)][" "]*[\n]*[" "]*[{][" "]*[\n]*[" "]*[_a-zA-Z0-9]*[" "]*[\n]*[" "]*[}][" "]*[\n]*[" "]*[E|e][L|l][S|s][E|e][" "]*[\n]*[" "]*[{][" "]*[\n]*[" "]*[_a-zA-Z0-9]*[" "]*[\n]*[" "]*[}]	|
@@ -214,9 +200,9 @@
 [r|R][e|E][t|T][u|U][r|R][n|N][" "]*[(][" "]*[0-9]*[" "]*[)][;]	|
 [r|R][e|E][t|T][u|U][r|R][n|N][" "]*[(][" "]*[$][_a-zA-Z][_a-zA-Z0-9]*[" "]*[)][;]	|
 [r|R][e|E][t|T][u|U][r|R][n|N][" "]*[(][" "]*["][_a-zA-Z0-9]*["][" "]*[)][;]	|
-[r|R][e|E][t|T][u|U][r|R][n|N][" "]*[(][" "]*['][_a-zA-Z0-9]*['][" "]*[)][;]	|	
-[s|S][w|W][i|I][t|T][c|C][h|H][" "]*[(]["\n"-" ".-_$-,a-zA-Z0-9]*[)][" "]*[\n]*[{]["\n"-" ".-_$-,:-;a-zA-Z0-9]*[}]	return STRUCTURE_EXPRESS;
+[r|R][e|E][t|T][u|U][r|R][n|N][" "]*[(][" "]*['][_a-zA-Z0-9]*['][" "]*[)][;]
 
+Variables predeterminadas 
 [$][G][L][O][B][A][L][S]	|
 [$][_][S][E][R][V][E][R]	|
 [$][_][G][E][T]	|
@@ -230,27 +216,15 @@
 [$][H][T][T][P][_][R][A][W][_][P][O][S][T][_][D][A][T][A]	|
 [$][h][t][t][p][_][r][e][s][p][o][n][s][e][_][h][e][a][d][e][r]	|
 [$][a][r][g][c]	|
-[$][a][r][g][v]		return PREDETERMINATE_VARIABLE;
+[$][a][r][g][v]	
 
+Commentarios 
 [/][/][" "-_,-=a-zA-Z0-9]*	|
 [#][" "-_,-=a-zA-Z0-9]*	|
-[/][*]["\n"-" ".-_,-=a-zA-Z0-9]*[*][/]	return COMMENT_EXPRESS;
+[/][*]["\n"-" ".-_,-=a-zA-Z0-9]*[*][/]
 
-[<][?][p|P][h|H][p|P]	|
-[?][>]		return ENDMARK;
+Acceso a la base de datos 
+[$][R|r][E|e][C|c][O|o][R|r][D|d][S|s][E|e][T|t][[]['][_A-Z0-9]*['][]]
 
-[$][R|r][E|e][C|c][O|o][R|r][D|d][S|s][E|e][T|t][[]['][_A-Z0-9]*['][]]	return DB_ACCESS;
-
-[f|F][u|U][n|N][c|C][t|T][i|I][o|O][n|N][(]["\n"-" ".-_$-,a-zA-Z0-9]*[)][" "]*[\n]*[" "]*[{][" "]*[\n]*[" "]*["\n"-" ".-_$-,a-zA-Z0-9]*[" "]*[\n]*[" "]*[R|r]*[E|e]*[T|t]*[U|u]*[R|r]*[N|n]*[" "]*["\n"-" ".-_$-,a-zA-Z0-9]*[;]*[" "]*[\n]*[" "]*[}]	|
-[a-zA-Z][_a-zA-Z0-9]*[" "]*[(]["\n"-" ".-_$-,a-zA-Z0-9]*[)]	return FUNCTION_DEFINITION;
-
-[ \t\n]					;
-.					printf("unexpected character\n");
-
-%%
-
-int yywrap(void)
-{
-	return 1;
-}
-
+Funciones 
+[f|F][u|U][n|N][c|C][t|T][i|I][o|O][n|N][(]["\n"-" ".-_$-,a-zA-Z0-9]*[)][" "]*[\n]*[" "]*[{][" "]*[\n]*[" "]*["\n"-" ".-_$-,a-zA-Z0-9]*[" "]*[\n]*[" "]*[R|r]*[E|e]*[T|t]*[U|u]*[R|r]*[N|n]*[" "]*["\n"-" ".-_$-,a-zA-Z0-9]*[;]*[" "]*[\n]*[" "]*[}]
